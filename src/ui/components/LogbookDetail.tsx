@@ -29,7 +29,7 @@ export function LogbookDetail({ pirepId, onBack }: Props) {
   if (loading) {
     return (
       <DetailShell onBack={onBack}>
-        <div className="flex flex-1 items-center justify-center bg-[#0c0d0e]">
+        <div className="flex flex-1 items-center justify-center bg-[--background]">
           <span className="text-text-ghost text-xs uppercase tracking-wider">
             Loading PIREP…
           </span>
@@ -41,7 +41,7 @@ export function LogbookDetail({ pirepId, onBack }: Props) {
   if (error || !pirep) {
     return (
       <DetailShell onBack={onBack}>
-        <div className="flex flex-1 items-center justify-center bg-[#0c0d0e]">
+        <div className="flex flex-1 items-center justify-center bg-[--background]">
           <div className="text-center">
             <div className="text-red-500 text-xs uppercase tracking-wider">
               {error?.message ?? "PIREP not found"}

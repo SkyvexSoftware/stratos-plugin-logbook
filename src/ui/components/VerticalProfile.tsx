@@ -65,7 +65,7 @@ export function VerticalProfile({ route = [] }: Props) {
   }, [points]);
 
   return (
-    <div className="border-border-subtle flex-shrink-0 border-t bg-[#0f1011] px-3.5 py-3">
+    <div className="border-border-subtle flex-shrink-0 border-t bg-[--sidebar] px-3.5 py-3">
       <div className="text-text-ghost mb-2 text-[9px] font-medium uppercase tracking-[0.13em]">
         Vertical Profile
       </div>

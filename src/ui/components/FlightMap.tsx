@@ -131,7 +131,7 @@ export function FlightMap({ route, depIcao, arrIcao, distance }: Props) {
 
   if (!hasRoute || !bounds || !lineGeoJSON || !endpointGeoJSON || !midpoint) {
     return (
-      <div className="flex min-w-0 flex-1 items-center justify-center bg-[#0c0d0e]">
+      <div className="flex min-w-0 flex-1 items-center justify-center bg-[--background]">
         <span className="text-text-ghost text-sm uppercase tracking-wider">
           No route data recorded
         </span>
@@ -140,7 +140,7 @@ export function FlightMap({ route, depIcao, arrIcao, distance }: Props) {
   }
 
   return (
-    <div className="relative min-w-0 flex-1 bg-[#0c0d0e]">
+    <div className="relative min-w-0 flex-1 bg-[--background]">
       <Map
         ref={mapRef}
         initialViewState={{
@@ -203,7 +203,12 @@ export function FlightMap({ route, depIcao, arrIcao, distance }: Props) {
       </Map>
 
       {/* Map overlay */}
-      <div className="border-border pointer-events-none absolute bottom-2.5 left-2.5 z-[1000] border bg-[rgba(14,15,16,0.85)] px-2.5 py-1.5">
+      <div
+        className="border-border pointer-events-none absolute bottom-2.5 left-2.5 z-[1000] border px-2.5 py-1.5"
+        style={{
+          backgroundColor: "color-mix(in srgb, var(--card) 85%, transparent)",
+        }}
+      >
         <OverlayRow label="Dep" value={depIcao} />
         <OverlayRow label="Arr" value={arrIcao} />
         <OverlayRow label="GC Dist" value={`${distance.toLocaleString()} nm`} />
@@ -216,8 +221,8 @@ export function FlightMap({ route, depIcao, arrIcao, distance }: Props) {
         title="Reset map view"
         aria-label="Reset map view"
         style={{
-          backgroundColor: "rgba(14, 15, 16, 0.92)",
-          boxShadow: "0 2px 8px rgba(0, 0, 0, 0.5)",
+          backgroundColor: "color-mix(in srgb, var(--card) 92%, transparent)",
+          boxShadow: "0 2px 8px rgba(0, 0, 0, 0.25)",
         }}
         className="group text-foreground hover:!bg-[#e03030] hover:border-[#e03030] hover:text-white absolute right-2.5 top-2.5 z-[1000] flex h-9 items-center gap-2 border-2 border-[#e03030]/70 px-3 text-[11px] font-medium uppercase tracking-[0.14em] transition-colors"
       >
