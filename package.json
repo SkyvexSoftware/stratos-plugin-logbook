@@ -1,0 +1,31 @@
+{
+  "name": "logbook",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "bundle": "pnpm build && stratos-deploy"
+  },
+  "devDependencies": {
+    "@skyvexsoftware/stratos-sdk": "^0.7.7",
+    "@tailwindcss/vite": "^4",
+    "@types/react": "^19",
+    "@vitejs/plugin-react": "^5",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tailwindcss": "^4",
+    "typescript": "^5",
+    "vite": "^7.3.0"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^5.96.2",
+    "lucide-react": "^0.577.0",
+    "maplibre-gl": "^5.22.0",
+    "react-map-gl": "^8.1.0"
+  }
+}
