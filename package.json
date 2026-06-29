@@ -9,7 +9,7 @@
     "bundle": "pnpm build && stratos-deploy"
   },
   "devDependencies": {
-    "@skyvexsoftware/stratos-sdk": "^0.7.7",
+    "@skyvexsoftware/stratos-sdk": "^0.15.0",
     "@tailwindcss/vite": "^4",
     "@types/react": "^19",
     "@vitejs/plugin-react": "^5",

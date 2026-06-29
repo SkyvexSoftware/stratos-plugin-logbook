@@ -6,9 +6,23 @@ import {
   type PirepListResponse,
 } from "@/shared/types";
 
+/** Snapshot of the bound airline — used by hooks to gate queries / key caches. */
 export type AirlineBinding = {
   baseUrl: string;
   token: string | null;
+};
+
+/**
+ * Minimal shape of the shell's VA API client (the axios instance returned by
+ * `useVaApi()`). It already carries the airline base URL + bearer and refreshes
+ * the token on a 401, so callers just hand it a relative path. Typed
+ * structurally so this module needs no axios dependency.
+ */
+export type VaClient = {
+  get<T>(
+    url: string,
+    config?: { signal?: AbortSignal },
+  ): Promise<{ data: T }>;
 };
 
 function buildQuery(params: LogbookListParams): string {
@@ -21,49 +35,29 @@ function buildQuery(params: LogbookListParams): string {
   return qs ? `?${qs}` : "";
 }
 
-// Callers gate on `airline.token` via the query's `enabled`, so this should
-// never be called with a null binding — assert for the type narrowing.
 async function call<T>(
-  airline: AirlineBinding | null,
+  va: VaClient,
   path: string,
   signal?: AbortSignal,
 ): Promise<T> {
-  if (!airline?.token) throw new Error("VA session is not active");
-  const res = await fetch(`${airline.baseUrl}${path}`, {
-    headers: {
-      Authorization: `Bearer ${airline.token}`,
-      Accept: "application/json",
-    },
-    signal,
-  });
-  if (!res.ok) {
-    throw new Error(`${res.status} ${res.statusText}`);
-  }
-  return (await res.json()) as T;
+  const res = await va.get<T>(path, { signal });
+  return res.data;
 }
 
 export const logbookApi = {
   listPireps: (
-    airline: AirlineBinding | null,
+    va: VaClient,
     params: LogbookListParams = {},
     signal?: AbortSignal,
   ): Promise<PirepListResponse> =>
-    call<PirepListResponse>(
-      airline,
-      VA_ROUTES.pireps + buildQuery(params),
-      signal,
-    ),
+    call<PirepListResponse>(va, VA_ROUTES.pireps + buildQuery(params), signal),
 
   getPirep: (
-    airline: AirlineBinding | null,
+    va: VaClient,
     id: string,
     signal?: AbortSignal,
-  ): Promise<PirepDetail> =>
-    call<PirepDetail>(airline, VA_ROUTES.pirep(id), signal),
+  ): Promise<PirepDetail> => call<PirepDetail>(va, VA_ROUTES.pirep(id), signal),
 
-  getStats: (
-    airline: AirlineBinding | null,
-    signal?: AbortSignal,
-  ): Promise<LogbookStats> =>
-    call<LogbookStats>(airline, VA_ROUTES.stats, signal),
+  getStats: (va: VaClient, signal?: AbortSignal): Promise<LogbookStats> =>
+    call<LogbookStats>(va, VA_ROUTES.stats, signal),
 };

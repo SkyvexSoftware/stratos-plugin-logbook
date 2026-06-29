@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { useVaApi } from "@skyvexsoftware/stratos-sdk";
 import { logbookApi } from "@/ui/api";
 import { useAirline } from "@/ui/hooks/useAirline";
 import { logbookKeys } from "@/ui/hooks/queryKeys";
@@ -12,11 +13,12 @@ type Result = {
 
 export function usePirepDetail(id: string | null): Result {
   const airline = useAirline();
+  const va = useVaApi();
   const enabled = !!airline?.token && id !== null;
 
   const query = useQuery({
     queryKey: logbookKeys.pirepDetail(airline?.baseUrl ?? "", id ?? ""),
-    queryFn: ({ signal }) => logbookApi.getPirep(airline, id as string, signal),
+    queryFn: ({ signal }) => logbookApi.getPirep(va, id as string, signal),
     enabled,
     staleTime: 5 * 60_000,
   });
