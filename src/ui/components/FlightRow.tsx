@@ -1,24 +1,12 @@
 import { ChevronRight } from "lucide-react";
-import type { LogbookPirepStatus, PirepListItem } from "@/shared/types";
+import type { PirepListItem } from "@/shared/types";
 import { formatDate, formatDuration } from "@/ui/helpers/format";
+import { StatusBadge } from "./StatusBadge";
 
 type Props = {
   pirep: PirepListItem;
   onClick: () => void;
 };
-
-function statusClasses(status: LogbookPirepStatus): string {
-  switch (status) {
-    case "accepted":
-      return "border-green-500/30 bg-green-500/[0.06] text-green-500";
-    case "pending":
-      return "border-amber-400/30 bg-amber-400/[0.06] text-amber-400";
-    case "rejected":
-      return "border-red-500/30 bg-red-500/[0.06] text-red-500";
-    case "processing":
-      return "border-blue-400/30 bg-blue-400/[0.06] text-blue-400";
-  }
-}
 
 export function FlightRow({ pirep, onClick }: Props) {
   const aircraft = pirep.aircraft_icao ?? pirep.aircraft_reg ?? "—";
@@ -51,11 +39,7 @@ export function FlightRow({ pirep, onClick }: Props) {
       <span className="font-mono text-xs text-text-muted">
         {pirep.landing_rate_fpm} fpm
       </span>
-      <span
-        className={`justify-self-start border px-1.5 py-0.5 text-[9px] font-medium uppercase tracking-wider ${statusClasses(pirep.status)}`}
-      >
-        {pirep.status}
-      </span>
+      <StatusBadge status={pirep.status} className="justify-self-start" />
       <ChevronRight
         aria-hidden="true"
         className="text-text-ghost group-hover:text-text-muted h-3.5 w-3.5 justify-self-end transition-colors"
