@@ -22,8 +22,8 @@ importers:
         version: 8.1.0(maplibre-gl@5.22.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
     devDependencies:
       '@skyvexsoftware/stratos-sdk':
-        specifier: ^0.21.0
-        version: 0.21.0(18789a75b75a6b97e935d8890d59d45a)
+        specifier: ^0.23.0
+        version: 0.23.0(7b2dbe12f101606e57e704d27068baba)
       '@tailwindcss/vite':
         specifier: ^4
         version: 4.2.2(vite@7.3.2(jiti@2.6.1)(lightningcss@1.32.0))
@@ -1124,8 +1124,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@skyvexsoftware/stratos-sdk@0.21.0':
-    resolution: {integrity: sha512-LI/i4LNc3EblXL4GixvvFle0C7ZUI72SpCLqOr0EXwmTBmEFPCkRBv01GOPZXzxO6cLJE8CwLxYynxUOPkE7fw==}
+  '@skyvexsoftware/stratos-sdk@0.23.0':
+    resolution: {integrity: sha512-onQammV8AEggMmq5lmL9+WBBNFRXnh22YxFfM80I4ibQ9eCZqizk3FeJLhSZDzGmkCZ2eVDMg8YkmZVjXPKpkA==}
     hasBin: true
     peerDependencies:
       '@radix-ui/react-alert-dialog': ^1.1.0
@@ -1144,9 +1144,16 @@ packages:
       class-variance-authority: ^0.7.0
       cmdk: ^1.0.0
       lucide-react: '>=0.300.0'
+      maplibre-gl: ^5.0.0
       react: ^19.0.0
+      react-map-gl: ^8.0.0
       socket.io-client: ^4.0.0
       vite: ^7.0.0
+    peerDependenciesMeta:
+      maplibre-gl:
+        optional: true
+      react-map-gl:
+        optional: true
 
   '@socket.io/component-emitter@3.1.2':
     resolution: {integrity: sha512-9BCxFwvbGg/RsZK9tjXd8s4UcwR0MWeFQ1XEKIQVVvAGJyINdrqKMcTRyLoK8Rse1GjzLV9cwjWV1olXRWEXVA==}
@@ -2844,7 +2851,7 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.60.1':
     optional: true
 
-  '@skyvexsoftware/stratos-sdk@0.21.0(18789a75b75a6b97e935d8890d59d45a)':
+  '@skyvexsoftware/stratos-sdk@0.23.0(7b2dbe12f101606e57e704d27068baba)':
     dependencies:
       '@radix-ui/react-alert-dialog': 1.1.15(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@radix-ui/react-dialog': 1.1.15(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -2869,6 +2876,9 @@ snapshots:
       socket.io-client: 4.8.3
       tailwind-merge: 3.5.0
       vite: 7.3.2(jiti@2.6.1)(lightningcss@1.32.0)
+    optionalDependencies:
+      maplibre-gl: 5.22.0
+      react-map-gl: 8.1.0(maplibre-gl@5.22.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
     transitivePeerDependencies:
       - debug
       - supports-color

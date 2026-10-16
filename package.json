@@ -1,6 +1,6 @@
 {
   "name": "logbook",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "private": true,
   "type": "module",
   "scripts": {
@@ -9,7 +9,7 @@
     "bundle": "pnpm build && stratos-deploy"
   },
   "devDependencies": {
-    "@skyvexsoftware/stratos-sdk": "^0.21.0",
+    "@skyvexsoftware/stratos-sdk": "^0.23.0",
     "@tailwindcss/vite": "^4",
     "@types/react": "^19",
     "@vitejs/plugin-react": "^5",

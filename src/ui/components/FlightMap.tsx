@@ -1,14 +1,10 @@
 import { useEffect, useMemo, useCallback, useRef, useState } from "react";
-import Map, { Source, Layer, Marker, type MapRef } from "react-map-gl/maplibre";
+import { Source, Layer, Marker, type MapRef } from "react-map-gl/maplibre";
+import { StratosMap } from "@skyvexsoftware/stratos-sdk";
 import type { LngLatBoundsLike } from "maplibre-gl";
 import { Maximize2 } from "lucide-react";
 import type { RoutePoint } from "@/shared/types";
-import { getMapStyle } from "@/ui/helpers/map-styles";
-import {
-  geodesicArc,
-  unwrapLongitudes,
-  applyMapLabelOverrides,
-} from "@/ui/helpers/geodesic";
+import { geodesicArc, unwrapLongitudes } from "@/ui/helpers/geodesic";
 
 type Props = {
   route: RoutePoint[];
@@ -28,7 +24,6 @@ function readPrimaryColor(): string {
 }
 
 export function FlightMap({ route, depIcao, arrIcao, distance }: Props) {
-  const mapStyle = getMapStyle();
   // Read the VA's brand colour from CSS once on mount; maplibre paint
   // expressions don't resolve `var()` themselves, so we have to hand it
   // a literal colour string.
@@ -114,10 +109,6 @@ export function FlightMap({ route, depIcao, arrIcao, distance }: Props) {
 
   const mapRef = useRef<MapRef | null>(null);
 
-  const handleLoad = useCallback((evt: { target: maplibregl.Map }) => {
-    applyMapLabelOverrides(evt.target);
-  }, []);
-
   const resetView = useCallback(() => {
     const map = mapRef.current;
     if (!map || !bounds) return;
@@ -141,17 +132,14 @@ export function FlightMap({ route, depIcao, arrIcao, distance }: Props) {
 
   return (
     <div className="relative min-w-0 flex-1 bg-[--background]">
-      <Map
+      <StratosMap
         ref={mapRef}
         initialViewState={{
           bounds,
           fitBoundsOptions: { padding: 40 },
         }}
-        onLoad={handleLoad}
-        mapStyle={mapStyle}
         style={{ width: "100%", height: "100%" }}
         scrollZoom={true}
-        attributionControl={{ compact: true }}
       >
         {/* Recorded route line */}
         <Source id="route-line" type="geojson" data={lineGeoJSON}>
@@ -200,7 +188,7 @@ export function FlightMap({ route, depIcao, arrIcao, distance }: Props) {
             <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z" />
           </svg>
         </Marker>
-      </Map>
+      </StratosMap>
 
       {/* Map overlay */}
       <div

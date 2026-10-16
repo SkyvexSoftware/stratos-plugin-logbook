@@ -3,7 +3,8 @@
   "id": "logbook",
   "type": "airline",
   "name": "Logbook",
-  "version": "1.0.3",
+  "version": "1.0.4",
+  "min_core_version": "2.52.0",
   "description": "A pilot's flight history at a glance. Browse every filed PIREP with paginated, server-side sorting and search; open a flight to see the recorded ACARS route on the map, full performance breakdown, and the simulator activity log. Profile-wide stats — total hours, distance, average landing rate, and current rank — sit in a header strip above the table.",
   "author": {
     "id": "skyvex-software",

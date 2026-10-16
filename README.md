@@ -42,7 +42,7 @@ src/
 └── ui/                 # Renderer (React 19 + Vite)
     ├── api.ts          # fetch wrappers around the three VA endpoints
     ├── hooks/          # TanStack Query hooks: list, detail, stats
-    ├── helpers/        # formatters, geodesic math, MapLibre style
+    ├── helpers/        # formatters, geodesic math
     └── components/     # LogbookList, LogbookDetail, FlightMap, Sidebar, …
 ```
 
