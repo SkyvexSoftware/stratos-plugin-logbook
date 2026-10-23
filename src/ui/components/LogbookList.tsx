@@ -7,6 +7,7 @@ import type {
   LogbookSortOrder,
 } from "@/shared/types";
 import { usePirepList } from "@/ui/hooks/usePirepList";
+import { vaErrorMessage } from "@/ui/helpers/va-error";
 import { useLogbookStats } from "@/ui/hooks/useLogbookStats";
 import { StatsBar } from "./StatsBar";
 import { FlightRow } from "./FlightRow";
@@ -139,7 +140,7 @@ export function LogbookList({ onSelect }: Props) {
         {error && (
           <div className="px-4 py-8 text-center">
             <div className="text-red-500 text-xs">
-              Failed to load PIREPs: {error.message}
+              Failed to load PIREPs: {vaErrorMessage(error)}
             </div>
           </div>
         )}

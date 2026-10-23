@@ -2,6 +2,7 @@ import { ArrowLeft } from "lucide-react";
 import type { PirepDetail } from "@/shared/types";
 import { usePirepDetail } from "@/ui/hooks/usePirepDetail";
 import { formatDuration } from "@/ui/helpers/format";
+import { vaErrorMessage } from "@/ui/helpers/va-error";
 import { FlightMap } from "./FlightMap";
 import { Sidebar } from "./Sidebar";
 import { StatusBadge } from "./StatusBadge";
@@ -31,8 +32,8 @@ export function LogbookDetail({ pirepId, onBack }: Props) {
       <DetailShell onBack={onBack}>
         <div className="flex flex-1 items-center justify-center bg-[--background]">
           <div className="text-center">
-            <div className="text-red-500 text-xs uppercase tracking-wider">
-              {error?.message ?? "PIREP not found"}
+            <div className="text-red-500 text-xs">
+              {vaErrorMessage(error) ?? "PIREP not found"}
             </div>
             <button
               onClick={onBack}
